@@ -19,6 +19,7 @@ When you run `flash.sh`, it:
 
 ## Requirements
 
+* Ansible
 * Vagrant
 * Virtualbox
 
