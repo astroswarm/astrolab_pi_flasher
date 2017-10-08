@@ -22,32 +22,29 @@ else
   unzip ./tmp/$RASPBIAN_RELEASE.zip -d ./tmp
 fi
 
-echo "Scanning devices..."
-sudo diskutil list | grep disk\\d$ | sed -E s/\ +0:\ +[^\*\+]+.//g
-
-echo "Enter device to hold Raspberry Pi image: "
-read OUTPUT_DEVICE
-
-echo "Unmounting volumes..."
-sudo diskutil unmountDisk force /dev/${OUTPUT_DEVICE}
+echo "Please flash your SD card with ./tmp/${RASPBIAN_RELEASE}.img using a tool like Etcher.io."
+echo "When done, ensure the flashed SD card is mounted."
+read -p "Press [Enter] to continue."
 
 echo "Enter target wifi network: "
 read WIFI_NETWORK
 echo "Enter target wifi password: "
 read WIFI_PASSWORD
 
-time sudo vagrant \
-  --output-device=$OUTPUT_DEVICE \
-  --raspbian-image-path=./tmp/$RASPBIAN_RELEASE.img \
-  --wifi-network=$WIFI_NETWORK \
-  --wifi-password=$WIFI_PASSWORD \
-  up
+echo "Enabling SSH..."
+touch /Volumes/boot/ssh
+echo "Done."
 
-echo "Bootstrap complete! You'll be asked to confirm destruction of the VM -- that's safe to do."
+echo "Configuring wifi..."
+cat >/Volumes/boot/wpa_supplicant.conf <<EOS
+network={
+  ssid="${WIFI_NETWORK}"
+  psk="${WIFI_PASSWORD}"
+}
+EOS
+echo "Done."
 
-time sudo vagrant \
-  --output-device= \
-  --raspbian-image-path= \
-  --wifi-network= \
-  --wifi-password= \
-  destroy
+echo "Configuration complete. Please eject your SD card."
+
+echo "You can look for your Raspberry Pi on your network with:"
+echo "    ping -c 1 google.com &> /dev/null ; arp -a | grep b8:27"
