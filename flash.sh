@@ -37,6 +37,10 @@ echo "Done."
 
 echo "Configuring wifi..."
 cat >/Volumes/boot/wpa_supplicant.conf <<EOS
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+country=US
+update_config=1
+ap_scan=1
 network={
   ssid="${WIFI_NETWORK}"
   psk="${WIFI_PASSWORD}"
