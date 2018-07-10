@@ -52,3 +52,4 @@ echo "Configuration complete. Please eject your SD card."
 
 echo "You can look for your Raspberry Pi on your network with:"
 echo "    ping -c 1 google.com &> /dev/null ; arp -a | grep b8:27"
+echo " or sudo nmap -sP 10.0.1.0/24 | awk '/^Nmap/{ip=\$NF}/B8:27:EB/{print ip}'"
