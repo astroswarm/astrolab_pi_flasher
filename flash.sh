@@ -26,26 +26,8 @@ echo "Please flash your SD card with ./tmp/${RASPBIAN_RELEASE}.img using a tool 
 echo "When done, ensure the flashed SD card is mounted."
 read -p "Press [Enter] to continue."
 
-echo "Enter target wifi network: "
-read WIFI_NETWORK
-echo "Enter target wifi password: "
-read WIFI_PASSWORD
-
 echo "Enabling SSH..."
 touch /Volumes/boot/ssh
-echo "Done."
-
-echo "Configuring wifi..."
-cat >/Volumes/boot/wpa_supplicant.conf <<EOS
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-country=US
-update_config=1
-ap_scan=1
-network={
-  ssid="${WIFI_NETWORK}"
-  psk="${WIFI_PASSWORD}"
-}
-EOS
 echo "Done."
 
 echo "Configuration complete. Please eject your SD card."
