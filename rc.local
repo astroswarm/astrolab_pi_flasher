@@ -18,6 +18,6 @@ if [ "$_IP" ]; then
 fi
 
 # Install Astrolab software
-/usr/local/bin/install-astrolab.sh 2>&1 | /usr/bin/logger
+HOME=/home/pi DEBIAN_FRONTEND=noninteractive su pi -c '/usr/local/bin/install-astrolab.sh 2>&1 | /usr/bin/logger'
 
 exit 0

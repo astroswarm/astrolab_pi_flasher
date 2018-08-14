@@ -1,15 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-export HOME=/root DEBIAN_FRONTEND=noninteractive
-
 if [ -e /usr/local/astrolab-install-complete ]; then
   echo "Skipping Astrolab installation; already complete."
   exit 0
 fi
 
 # Ensure ssh access is enabled
-/usr/bin/touch /boot/ssh
+sudo /usr/bin/touch /boot/ssh
 
 # Set the password of the pi user
 /bin/echo "pi:astrolab" | sudo /usr/sbin/chpasswd
@@ -22,8 +20,8 @@ fi
 /bin/chmod 600 /home/pi/.ssh/authorized_keys
 
 # Install packages needed for our ansible scripts.
-/usr/bin/apt-get update
-/usr/bin/apt-get -y install ansible git
+sudo /usr/bin/apt-get update
+sudo /usr/bin/apt-get -y install ansible git
 
 # Run ansible playbook.
 /usr/bin/ansible-pull -U https://github.com/astroswarm/astrolab_builder.git -C master -i localhost, --accept-host-key bootstrap.yml
@@ -32,4 +30,4 @@ fi
 /usr/bin/touch /usr/local/astrolab-install-complete
 
 # Reboot
-/sbin/reboot
+sudo /sbin/reboot
