@@ -1,4 +1,3 @@
 .vagrant/
 *.retry
-disk-image.vmdk
 tmp/

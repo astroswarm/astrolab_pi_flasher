@@ -14,25 +14,12 @@ else
   then
     echo "Raspbian archive found."
   else
-    echo "Raspbian archive not found. Downloading latest..."
+    echo "Raspbian archive not found. Downloading..."
     mkdir -p ./tmp
     curl -L -o ./tmp/$RASPBIAN_ARCHIVE $RASPBIAN_URL
   fi
-
-  echo "Extracting Raspbian archive..."
-  unzip ./tmp/$RASPBIAN_ARCHIVE -d ./tmp
 fi
 
-echo "Please flash your SD card with ./tmp/${RASPBIAN_IMAGE} using a tool like Etcher.io."
-echo "When done, ensure the flashed SD card is mounted."
-read -p "Press [Enter] to continue."
+vagrant up --provision
 
-echo "Enabling SSH..."
-touch /Volumes/boot/ssh
-echo "Done."
-
-echo "Configuration complete. Please eject your SD card."
-
-echo "You can look for your Raspberry Pi on your network with:"
-echo "    ping -c 1 google.com &> /dev/null ; arp -a | grep b8:27"
-echo " or sudo nmap -sP 10.0.1.0/24 | awk '/^Nmap/{ip=\$NF}/B8:27:EB/{print ip}'"
+echo "Raspbian image saved in ./tmp. You may now run vagrant destroy."
