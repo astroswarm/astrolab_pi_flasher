@@ -28,7 +28,8 @@ sudo /usr/bin/apt-get -y install ansible git
 /usr/bin/ansible-pull -U https://github.com/astroswarm/astrolab_builder.git -C master -i localhost, --accept-host-key bootstrap.yml
 
 # Mark complete
-/usr/bin/touch /usr/local/astrolab-install-complete
+sudo /usr/bin/touch /usr/local/astrolab-install-complete
+sudo /bin/chown pi:pi /usr/local/astrolab-install-complete
 
 # Reboot
 sudo /sbin/reboot
