@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -e
+set -x
+trap "sudo reboot" ERR
 
 if [ -e /usr/local/astrolab-install-complete ]; then
   echo "Skipping Astrolab installation; already complete."
