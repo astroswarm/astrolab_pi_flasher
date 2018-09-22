@@ -10,4 +10,4 @@ Creates an Astrolab OS image.
 
 ## Quick Start
 
-1. Run `./flash.sh`.
+1. Run `./build-image.sh`.
