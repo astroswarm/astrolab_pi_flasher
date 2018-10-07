@@ -41,7 +41,7 @@ sudo /usr/bin/apt-get -y install ansible git
 
 # Run ansible playbook.
 set_status "Running ansible playbook"
-/usr/bin/ansible-pull -U https://github.com/astroswarm/astrolab_builder.git -C master -i localhost, --accept-host-key bootstrap.yml
+/usr/bin/ansible-pull -U https://github.com/astroswarm/astrolab_bootstrapper.git -C master -i localhost, --accept-host-key bootstrap.yml
 
 # Mark complete
 set_status "Marking installation as complete"
